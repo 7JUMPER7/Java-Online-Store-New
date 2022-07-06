@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Online Store</title>
+    <div th:replace="fragments/header :: header-head"></div>
+</head>
+
+<div th:replace="fragments/header :: header"></div>
+
+<body>
+    <main class="mainContainer">
+        <h1>Homepage</h1>
+        <div class="container" th:each="good : ${goodsList}">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="'Id: ' + ${good.getId()}"></h5>
+                    <h3 class="card-text" th:text="'Название: ' + ${good.getName()}"></h3>
+                    <p class="card-text" th:text="'Цена: ' + ${good.getPrice()} + ' грн'"></p>
+                    <p class="card-text" th:text="'Описание: ' + ${good.getDescription()}"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+<div th:replace="fragments/footer" :: footer></div>
+
+</html>
