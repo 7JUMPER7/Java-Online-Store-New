@@ -10,6 +10,13 @@
         <property name="connection.password">admin</property>
         <property name="show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+        <mapping class="com.example.onlinestorenew.models.CartEntity"/>
+        <mapping class="com.example.onlinestorenew.models.CartGoodEntity"/>
+        <mapping class="com.example.onlinestorenew.models.CategoryEntity"/>
+        <mapping class="com.example.onlinestorenew.models.GoodEntity"/>
+        <mapping class="com.example.onlinestorenew.models.ImageEntity"/>
+        <mapping class="com.example.onlinestorenew.models.OrderEntity"/>
+        <mapping class="com.example.onlinestorenew.models.UserEntity"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

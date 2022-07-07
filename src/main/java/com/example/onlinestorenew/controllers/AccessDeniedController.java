@@ -23,6 +23,6 @@ public class AccessDeniedController implements AccessDeniedHandler {
         if(auth != null) {
             logger.info("User " + auth.getName() + " tried to access: " + httpServletRequest.getRequestURI());
         }
-        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/403");
+        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/error/403");
     }
 }

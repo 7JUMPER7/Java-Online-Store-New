@@ -19,6 +19,12 @@ public class GoodEntity {
     @Basic
     @Column(name = "description")
     private String description;
+    @Basic
+    @Column(name = "category_id")
+    private Integer categoryId;
+    @Basic
+    @Column(name = "preview_image")
+    private String previewImage;
 
     public int getId() {
         return id;
@@ -52,16 +58,32 @@ public class GoodEntity {
         this.description = description;
     }
 
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getPreviewImage() {
+        return previewImage;
+    }
+
+    public void setPreviewImage(String previewImage) {
+        this.previewImage = previewImage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GoodEntity that = (GoodEntity) o;
-        return id == that.id && Double.compare(that.price, price) == 0 && Objects.equals(name, that.name) && Objects.equals(description, that.description);
+        return id == that.id && Double.compare(that.price, price) == 0 && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(categoryId, that.categoryId) && Objects.equals(previewImage, that.previewImage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, description);
+        return Objects.hash(id, name, price, description, categoryId, previewImage);
     }
 }

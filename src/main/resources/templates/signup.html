@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <div th:replace="fragments/header :: header-head"></div>
+</head>
+
+<div th:replace="fragments/header :: header"></div>
+
+<body>
+<main class="form-signin">
+    <form th:action="@{/signup}" method="post">
+        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name" required>
+            <label for="floatingName">Name</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingCity" placeholder="City" name="city" required>
+            <label for="floatingCity">City</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingCountry" placeholder="County" name="country" required>
+            <label for="floatingCity">County</label>
+        </div>
+        <div class="form-floating">
+            <input type="tel" class="form-control" id="floatingPhone" placeholder="Phone" name="phone">
+            <label for="floatingCity">Phone</label>
+        </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" required>
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+            <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingConfirmPassword" placeholder="Confirm password" name="password2" required>
+            <label for="floatingConfirmPassword">Confirm password</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+        <div th:if="${message != null}">
+            <div class="alert alert-danger" th:text="${message}"></div>
+        </div>
+    </form>
+</main>
+</body>
+<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/footer" :: footer></div>
+
+</html>
