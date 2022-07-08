@@ -50,6 +50,6 @@ public class AuthController {
         if(!userService.createUser(newUser)) {
             return new ModelAndView("/signup", "message", "Some error");
         }
-        return new ModelAndView("/index");
+        return new ModelAndView("/login", "success", "Successfully signed up, please sign in.");
     }
 }

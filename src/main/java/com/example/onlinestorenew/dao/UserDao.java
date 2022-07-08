@@ -7,7 +7,6 @@ import org.hibernate.Transaction;
 
 public class UserDao {
     public UserEntity findByEmail(String email) {
-        System.out.println("DAO EMAIL: " + email);
         UserEntity user = (UserEntity)HibernateSessionFactoryUtil.getSessionFactory().openSession()
                 .createQuery("FROM UserEntity WHERE email = :email")
                 .setParameter("email", email)

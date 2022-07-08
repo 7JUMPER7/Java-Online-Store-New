@@ -14,4 +14,8 @@ public class GoodService {
     public List<GoodEntity> findAllGoods() {
         return goodDao.findAll();
     }
+
+    public GoodEntity createGood(GoodEntity good) {
+        return goodDao.createGood(good);
+    }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Online Store</title>
     <div th:replace="fragments/header :: header-head"></div>
@@ -8,7 +8,9 @@
 <div th:replace="fragments/header :: header"></div>
 
 <body>
-    <main class="mainContainer">
+    <main class="mainContainer container">
+        <a sec:authorize="hasAuthority('ADMIN')" href="/admin/good/create" class="btn btn-success">Add Good</a>
+
         <h1>Homepage</h1>
         <div class="container" th:each="good : ${goodsList}">
             <div class="card" style="width: 18rem;">

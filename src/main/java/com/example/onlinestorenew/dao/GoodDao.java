@@ -2,6 +2,8 @@ package com.example.onlinestorenew.dao;
 
 import com.example.onlinestorenew.models.GoodEntity;
 import com.example.onlinestorenew.utils.HibernateSessionFactoryUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -11,9 +13,20 @@ public class GoodDao {
                 .getSessionFactory()
                 .openSession()
                 .createQuery("FROM GoodEntity").list();
-        GoodEntity test = goods.get(0);
-        System.out.println(goods.get(0) instanceof GoodEntity);
-        System.out.println(test.getName());
         return goods;
+    }
+
+    public GoodEntity createGood(GoodEntity good) {
+        try {
+            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+            Transaction tx1 = session.beginTransaction();
+            session.save(good);
+            tx1.commit();
+            session.close();
+            return good;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }

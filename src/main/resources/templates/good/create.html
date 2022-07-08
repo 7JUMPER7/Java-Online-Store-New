@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Good</title>
+    <div th:replace="fragments/header :: header-head"></div>
+</head>
+
+<div th:replace="fragments/header :: header"></div>
+
+<body>
+    <main class="mainContainer">
+        <div class="container form-signin">
+            <form th:action="@{/admin/good/create}" method="post" enctype="multipart/form-data">
+                <h1 class="h3 mb-3 fw-normal">Create Good</h1>
+
+                <div class="form-floating">
+                    <input type="file" name="images" id="floatingImages" multiple>
+                    <label for="floatingImages">Images</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name">
+                    <label for="floatingName">Name</label>
+                </div>
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="floatingPrice" placeholder="Price" name="price">
+                    <label for="floatingPrice">Price</label>
+                </div>
+                <div class="form-floating">
+                    <select class="form-control" id="floatingCategory" placeholder="Category" name="category">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <label for="floatingCategory">Category</label>
+                </div>
+                <div class="form-floating">
+                    <textarea type="text" class="form-control" id="floatingDescription" placeholder="Description" name="description" style="height: 150px"></textarea>
+                    <label for="floatingDescription">Description</label>
+                </div>
+
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Add</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
