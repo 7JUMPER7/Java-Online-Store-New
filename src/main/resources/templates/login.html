@@ -10,27 +10,27 @@
 
 <body>
 <main class="mainContainer">
-    <div class="container form-signin">
+    <div class="container form-signin" style="max-width: 400px">
         <form th:action="@{/login}" method="post">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-            <div class="form-floating">
+            <div class="form-floating my-2">
                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
                 <label for="floatingInput">Email address</label>
             </div>
-            <div class="form-floating">
+            <div class="form-floating my-2">
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
                 <label for="floatingPassword">Password</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <button class="w-100 btn btn-lg btn-primary my-2" type="submit">Sign in</button>
             <div th:if="${param.error}">
                 <div class="alert alert-danger">
                     Invalid username and password.
                 </div>
             </div>
             <div th:if="${success != null}">
-                <div class="alert alert-success" th:text="${success}"></div>
+                <div class="alert alert-success my-2" th:text="${success}"></div>
             </div>
         </form>
     </div>

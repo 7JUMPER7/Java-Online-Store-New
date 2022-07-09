@@ -31,4 +31,12 @@ public class ImageDao {
             return false;
         }
     }
+
+    public void delete(ImageEntity image) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        session.delete(image);
+        tx1.commit();
+        session.close();
+    }
 }

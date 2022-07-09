@@ -9,18 +9,27 @@
 
 <body>
     <main class="mainContainer container">
-        <a sec:authorize="hasAuthority('ADMIN')" href="/admin/good/create" class="btn btn-success">Add Good</a>
+        <div class="adminInputsContainer">
+            <a sec:authorize="hasAuthority('ADMIN')" href="/admin/good/create" class="btn btn-success">Add Good</a>
+        </div>
 
-        <h1>Homepage</h1>
-        <div class="container" th:each="good : ${goodsList}">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="'Id: ' + ${good.getId()}"></h5>
-                    <h3 class="card-text" th:text="'Название: ' + ${good.getName()}"></h3>
-                    <p class="card-text" th:text="'Цена: ' + ${good.getPrice()} + ' грн'"></p>
-                    <p class="card-text" th:text="'Описание: ' + ${good.getDescription()}"></p>
+        <div class="d-flex align-items-center justify-content-between my-4">
+            <h1>Available goods</h1>
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 mx-3">
+                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+            </form>
+        </div>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <a class="col goodLink" th:each="good : ${goodsList}" th:href="@{'/good/' + ${good.getId()}}">
+                <div class="card h-100">
+                    <img th:src="@{'/images/' + ${good.getPreviewImage()}}" class="card-img-top" th:alt="${good.getName()}" style="max-height: 200px; object-fit: cover">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${good.getName()}"></h5>
+                        <p class="card-text" th:text="${good.getDescription()}"></p>
+                        <h5 class="card-title" th:text="${good.getPrice() + ' грн'}"></h5>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </main>
 </body>

@@ -21,7 +21,7 @@ public class ImageService {
     }
 
     public boolean createImages(MultipartFile[] images, int goodId, String firstName) {
-        if(images.length == 0) {
+        if(images.length == 0 || firstName.equals("")) {
             return true;
         }
 
@@ -43,5 +43,16 @@ public class ImageService {
         }
 
         return imageDao.createImages(imageEntities);
+    }
+
+    public void deleteImages(int goodId) {
+        List<ImageEntity> goodImages = getGoodImages(goodId);
+        for(ImageEntity image : goodImages) {
+            FileUtil.deleteFile(image.getPath());
+        }
+    }
+
+    public void deleteImages(ImageEntity image) {
+        imageDao.delete(image);
     }
 }

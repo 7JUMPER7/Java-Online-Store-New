@@ -10,40 +10,40 @@
 
 <body>
 <main class="mainContainer">
-    <div class="container form-signin">
+    <div class="container form-signin" style="max-width: 400px">
         <form th:action="@{/signup}" method="post">
             <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name" required>
+                <input type="text" class="form-control my-2" id="floatingName" placeholder="Name" name="name" required>
                 <label for="floatingName">Name</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingCity" placeholder="City" name="city" required>
+                <input type="text" class="form-control my-2" id="floatingCity" placeholder="City" name="city" required>
                 <label for="floatingCity">City</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingCountry" placeholder="County" name="country" required>
+                <input type="text" class="form-control my-2" id="floatingCountry" placeholder="County" name="country" required>
                 <label for="floatingCountry">County</label>
             </div>
             <div class="form-floating">
-                <input type="tel" class="form-control" id="floatingPhone" placeholder="Phone" name="phone">
+                <input type="tel" class="form-control my-2" id="floatingPhone" placeholder="Phone" name="phone">
                 <label for="floatingPhone">Phone</label>
             </div>
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" required>
+                <input type="email" class="form-control my-2" id="floatingInput" placeholder="name@example.com" name="email" required>
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+                <input type="password" class="form-control my-2" id="floatingPassword" placeholder="Password" name="password" required>
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingConfirmPassword" placeholder="Confirm password" name="password2" required>
+                <input type="password" class="form-control my-2" id="floatingConfirmPassword" placeholder="Confirm password" name="password2" required>
                 <label for="floatingConfirmPassword">Confirm password</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+            <button class="w-100 btn btn-lg btn-primary my-2" type="submit">Sign up</button>
             <div th:if="${message != null}">
                 <div class="alert alert-danger" th:text="${message}"></div>
             </div>

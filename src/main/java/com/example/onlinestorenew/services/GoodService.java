@@ -11,11 +11,27 @@ public class GoodService {
         goodDao = new GoodDao();
     }
 
+    public GoodEntity findById(int id) {
+        return goodDao.findById(id);
+    }
+
     public List<GoodEntity> findAllGoods() {
         return goodDao.findAll();
     }
 
     public GoodEntity createGood(GoodEntity good) {
         return goodDao.createGood(good);
+    }
+
+    public boolean deleteGood(int goodId) {
+        GoodEntity good = findById(goodId);
+        if(good == null) {
+            return false;
+        }
+
+        ImageService imageService = new ImageService();
+        imageService.deleteImages(good.getId());
+        goodDao.deleteGood(good);
+        return true;
     }
 }

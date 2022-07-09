@@ -60,6 +60,15 @@ public class FileUtil {
         }
     }
 
+    public static boolean deleteFile(String filename) {
+        try {
+            return Files.deleteIfExists(Paths.get(folderPath + filename));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
     private static void createDirIfNotExist() {
         File directory = new File(filePath.toString());
         if (! directory.exists()){

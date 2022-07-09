@@ -9,36 +9,34 @@
 
 <body>
     <main class="mainContainer">
-        <div class="container form-signin">
+        <div th:if="${categories != null}" class="container form-signin" style="max-width: 500px">
             <form th:action="@{/admin/good/create}" method="post" enctype="multipart/form-data">
                 <h1 class="h3 mb-3 fw-normal">Create Good</h1>
 
-                <div class="form-floating">
-                    <input type="file" name="images" id="floatingImages" multiple>
-                    <label for="floatingImages">Images</label>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Select images</label>
+                    <input class="form-control" type="file" id="formFile" name="images" multiple>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating my-2">
                     <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name">
                     <label for="floatingName">Name</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating my-2">
                     <input type="number" class="form-control" id="floatingPrice" placeholder="Price" name="price">
                     <label for="floatingPrice">Price</label>
                 </div>
-                <div class="form-floating">
-                    <select class="form-control" id="floatingCategory" placeholder="Category" name="category">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                <div class="form-floating my-2">
+                    <select class="form-control" id="floatingCategory" placeholder="Category" name="category" th:each="category : ${categories}">
+                        <option th:value="${category.getId()}" th:text="${category.getName()}"></option>
                     </select>
                     <label for="floatingCategory">Category</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating my-2">
                     <textarea type="text" class="form-control" id="floatingDescription" placeholder="Description" name="description" style="height: 150px"></textarea>
                     <label for="floatingDescription">Description</label>
                 </div>
 
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Add</button>
+                <button class="w-100 btn btn-lg btn-primary my-2" type="submit">Add</button>
             </form>
         </div>
     </main>

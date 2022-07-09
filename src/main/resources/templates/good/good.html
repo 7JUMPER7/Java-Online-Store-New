@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <title th:text="${good.getName()}">Good Page</title>
+  <div th:replace="fragments/header :: header-head"></div>
+</head>
+
+<div th:replace="fragments/header :: header"></div>
+
+<body>
+<main class="mainContainer container">
+  <div class="adminInputsContainer">
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/admin/good/edit/' + ${good.getId()}}" class="btn btn-warning">Edit Good</a>
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/admin/good/delete/' + ${good.getId()}}"class="btn btn-danger">Delete Good</a>
+  </div>
+
+  <div class="goodContainer">
+    <div id="carouselExampleControls" class="carousel slide carousel-dark" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div th:class="'carousel-item' + ${(i.index == 0) ? ' active' : ''}" th:each="image, i : ${images}">
+          <img th:src="@{'/images/' + ${image.getPath()}}" class="d-block w-100" th:alt="${image.getPath()}">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon text-black" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon text-black" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div class="goodInfoContainer">
+      <h1 th:text="${good.getName()}"></h1>
+      <p th:text="${good.getDescription()}"></p>
+      <div class="goodBottom">
+        <h2 th:text="${good.getPrice() + ' грн'}"></h2>
+        <a class="buyBtn" th:href="@{'/good/buy/' + ${good.getId()}}" th:text="Buy"></a>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+
+<div th:replace="fragments/footer" :: footer></div>
+
+</html>
