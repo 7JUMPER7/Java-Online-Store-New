@@ -11,7 +11,24 @@ public class CategoryService {
         categoryDao = new CategoryDao();
     }
 
+    public CategoryEntity getById(int id) {
+        return categoryDao.getById(id);
+    }
+
     public List<CategoryEntity> getAllCategories() {
         return categoryDao.getAllCategories();
+    }
+
+    public CategoryEntity createCaregory(CategoryEntity category) {
+        return categoryDao.createCategory(category);
+    }
+
+    public boolean deleteCategory(int id) {
+        CategoryEntity category = getById(id);
+        return categoryDao.deleteCategory(category);
+    }
+
+    public boolean updateCategory(CategoryEntity category) {
+        return categoryDao.updateCategory(category);
     }
 }

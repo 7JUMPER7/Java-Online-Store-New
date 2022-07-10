@@ -5,7 +5,6 @@ import com.example.onlinestorenew.models.ImageEntity;
 import com.example.onlinestorenew.services.CategoryService;
 import com.example.onlinestorenew.services.GoodService;
 import com.example.onlinestorenew.services.ImageService;
-import com.example.onlinestorenew.utils.FileUtil;
 import com.example.onlinestorenew.utils.Helpers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,9 +34,6 @@ public class GoodController {
             @RequestParam(name = "description") String description
     ) {
         GoodEntity good = new GoodEntity();
-        if(images != null && images.length > 0) {
-            good.setPreviewImage(Helpers.generateUUIDName(images[0].getOriginalFilename()));
-        }
         good.setName(name);
         good.setPrice(price);
         good.setCategoryId(categoryId);
@@ -48,7 +43,11 @@ public class GoodController {
         GoodEntity savedGood = goodService.createGood(good);
         if(savedGood != null) {
             ImageService imageService = new ImageService();
-            imageService.createImages(images, savedGood.getId(), savedGood.getPreviewImage());
+            List<ImageEntity> savedImages = imageService.createImages(images, savedGood.getId());
+            if(savedImages != null && savedImages.size() > 0) {
+                savedGood.setPreviewImageId(savedImages.get(0).getId());
+                goodService.updateGood(good);
+            }
         }
 
         return new RedirectView("/");
@@ -81,7 +80,10 @@ public class GoodController {
         }
 
         GoodService goodService = new GoodService();
-        model.put("good", goodService.findById(id));
+        GoodEntity good = goodService.findById(id);
+        model.put("controller", "good");
+        model.put("name", good.getName());
+        model.put("id", good.getId());
         return "/admin/deleteConfirm";
     }
     @PostMapping(value = "/admin/good/delete/{id}")

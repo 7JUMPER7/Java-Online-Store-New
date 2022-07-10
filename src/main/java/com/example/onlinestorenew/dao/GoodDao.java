@@ -1,9 +1,11 @@
 package com.example.onlinestorenew.dao;
 
 import com.example.onlinestorenew.models.GoodEntity;
+import com.example.onlinestorenew.models.ImageEntity;
 import com.example.onlinestorenew.utils.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.mapping.Join;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class GoodDao {
         List<GoodEntity> goods = (List<GoodEntity>) HibernateSessionFactoryUtil
                 .getSessionFactory()
                 .openSession()
-                .createQuery("FROM GoodEntity").list();
+                .createQuery("FROM GoodEntity ").list();
         return goods;
     }
 
@@ -39,6 +41,20 @@ public class GoodDao {
             Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
             Transaction tx1 = session.beginTransaction();
             session.delete(good);
+            tx1.commit();
+            session.close();
+            return true;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateGood(GoodEntity good) {
+        try {
+            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+            Transaction tx1 = session.beginTransaction();
+            session.update(good);
             tx1.commit();
             session.close();
             return true;

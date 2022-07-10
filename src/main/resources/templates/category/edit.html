@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Category</title>
+    <div th:replace="fragments/header :: header-head"></div>
+</head>
+
+<div th:replace="fragments/header :: header"></div>
+
+<body>
+    <main class="mainContainer">
+        <div class="container form-signin" style="max-width: 500px">
+            <form th:action="@{'/admin/category/edit/' + ${category.getId()}}" method="post">
+                <h1 class="h3 mb-3 fw-normal">Edit Category</h1>
+
+                <div class="form-floating my-2">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name" th:value="${category.getName()}">
+                    <label for="floatingName">Name</label>
+                </div>
+
+                <button class="w-100 btn btn-dark my-2" type="submit">Edit</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -29,9 +29,11 @@ public class GoodService {
             return false;
         }
 
-        ImageService imageService = new ImageService();
-        imageService.deleteImages(good.getId());
         goodDao.deleteGood(good);
         return true;
+    }
+
+    public boolean updateGood(GoodEntity good) {
+        return goodDao.updateGood(good);
     }
 }

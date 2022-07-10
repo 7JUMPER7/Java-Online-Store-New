@@ -1,6 +1,7 @@
 package com.example.onlinestorenew.models;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
@@ -11,11 +12,14 @@ public class ImageEntity {
     @Column(name = "id")
     private int id;
     @Basic
-    @Column(name = "path")
-    private String path;
+    @Column(name = "data")
+    private byte[] data;
     @Basic
     @Column(name = "good_id")
     private Integer goodId;
+    @Basic
+    @Column(name = "filename")
+    private String filename;
 
     public int getId() {
         return id;
@@ -25,12 +29,12 @@ public class ImageEntity {
         this.id = id;
     }
 
-    public String getPath() {
-        return path;
+    public byte[] getData() {
+        return data;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setData(byte[] data) {
+        this.data = data;
     }
 
     public Integer getGoodId() {
@@ -41,16 +45,22 @@ public class ImageEntity {
         this.goodId = goodId;
     }
 
+    public String getFilename() { return filename; }
+
+    public void setFilename(String filename) { this.filename = filename; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ImageEntity that = (ImageEntity) o;
-        return id == that.id && Objects.equals(path, that.path) && Objects.equals(goodId, that.goodId);
+        return id == that.id && Arrays.equals(data, that.data) && Objects.equals(goodId, that.goodId) && Objects.equals(filename, that.filename);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, path, goodId);
+        int result = Objects.hash(id, goodId, filename);
+        result = 31 * result + Arrays.hashCode(data);
+        return result;
     }
 }

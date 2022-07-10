@@ -20,7 +20,7 @@
                 <div class="d-flex align-items-center">
                     <div class="text-end" sec:authorize="!isAuthenticated()">
                         <a th:href="@{/login}" type="button" class="btn btn-outline-light me-2">Login</a>
-                        <a th:href="@{/signup}" type="button" class="btn btn-warning">Sign-up</a>
+                        <a th:href="@{/signup}" type="button" class="btn btn-outline-light me-2">Sign-up</a>
                     </div>
                     <div class="text-end" sec:authorize="isAuthenticated()">
                         <a th:href="@{/logout}" type="button" class="btn btn-outline-light me-2">Sign Out</a>

@@ -6,9 +6,9 @@ import com.example.onlinestorenew.utils.FileUtil;
 import com.example.onlinestorenew.utils.Helpers;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class ImageService {
     private ImageDao imageDao;
@@ -16,40 +16,34 @@ public class ImageService {
         imageDao = new ImageDao();
     }
 
+    public ImageEntity getImage(int id) {
+        return imageDao.getImage(id);
+    }
+
     public List<ImageEntity> getGoodImages(int goodId) {
         return imageDao.getGoodImages(goodId);
     }
 
-    public boolean createImages(MultipartFile[] images, int goodId, String firstName) {
-        if(images.length == 0 || firstName.equals("")) {
-            return true;
+    public List<ImageEntity> createImages(MultipartFile[] images, int goodId) {
+        if(images.length == 0 || images[0].getOriginalFilename().equals("")) {
+            return null;
         }
 
         List<ImageEntity> imageEntities = new ArrayList<ImageEntity>();
 
-        for(int i = 0; i < images.length; i++) {
-            String newName = "temp.jpg";
-            if(i == 0) {
-                newName = firstName;
-            } else {
-                newName = Helpers.generateUUIDName(images[i].getOriginalFilename());
+        for(MultipartFile image : images) {
+            try {
+                ImageEntity imageEntity = new ImageEntity();
+                imageEntity.setGoodId(goodId);
+                imageEntity.setFilename(image.getOriginalFilename());
+                imageEntity.setData(image.getBytes());
+                imageEntities.add(imageEntity);
+            } catch(IOException e) {
+                System.out.println(e.getMessage());
             }
-
-            FileUtil.uploadFile(images[i], newName);
-            ImageEntity imageEntity = new ImageEntity();
-            imageEntity.setGoodId(goodId);
-            imageEntity.setPath(newName);
-            imageEntities.add(imageEntity);
         }
 
         return imageDao.createImages(imageEntities);
-    }
-
-    public void deleteImages(int goodId) {
-        List<ImageEntity> goodImages = getGoodImages(goodId);
-        for(ImageEntity image : goodImages) {
-            FileUtil.deleteFile(image.getPath());
-        }
     }
 
     public void deleteImages(ImageEntity image) {

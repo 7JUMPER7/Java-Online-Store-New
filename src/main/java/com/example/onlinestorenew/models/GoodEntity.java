@@ -23,8 +23,8 @@ public class GoodEntity {
     @Column(name = "category_id")
     private Integer categoryId;
     @Basic
-    @Column(name = "preview_image")
-    private String previewImage;
+    @Column(name = "preview_image_id")
+    private int previewImageId;
 
     public int getId() {
         return id;
@@ -66,12 +66,12 @@ public class GoodEntity {
         this.categoryId = categoryId;
     }
 
-    public String getPreviewImage() {
-        return previewImage;
+    public int getPreviewImageId() {
+        return previewImageId;
     }
 
-    public void setPreviewImage(String previewImage) {
-        this.previewImage = previewImage;
+    public void setPreviewImageId(int previewImageId) {
+        this.previewImageId = previewImageId;
     }
 
     @Override
@@ -79,11 +79,11 @@ public class GoodEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GoodEntity that = (GoodEntity) o;
-        return id == that.id && Double.compare(that.price, price) == 0 && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(categoryId, that.categoryId) && Objects.equals(previewImage, that.previewImage);
+        return id == that.id && Double.compare(that.price, price) == 0 && previewImageId == that.previewImageId && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(categoryId, that.categoryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, description, categoryId, previewImage);
+        return Objects.hash(id, name, price, description, categoryId, previewImageId);
     }
 }

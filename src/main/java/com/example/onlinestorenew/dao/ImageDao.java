@@ -8,6 +8,10 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class ImageDao {
+    public ImageEntity getImage(int id) {
+        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(ImageEntity.class, id);
+    }
+
     public List<ImageEntity> getGoodImages(int goodId) {
         List<ImageEntity> image = (List<ImageEntity>) HibernateSessionFactoryUtil.getSessionFactory().openSession()
                 .createQuery("FROM ImageEntity WHERE goodId = :goodId")
@@ -16,7 +20,7 @@ public class ImageDao {
         return image;
     }
 
-    public boolean createImages(List<ImageEntity> images) {
+    public List<ImageEntity> createImages(List<ImageEntity> images) {
         try {
             Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
             Transaction tx1 = session.beginTransaction();
@@ -25,18 +29,22 @@ public class ImageDao {
             }
             tx1.commit();
             session.close();
-            return true;
+            return images;
         } catch(Exception e) {
             System.out.println(e.getMessage());
-            return false;
+            return null;
         }
     }
 
     public void delete(ImageEntity image) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.delete(image);
-        tx1.commit();
-        session.close();
+        try {
+            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+            Transaction tx1 = session.beginTransaction();
+            session.delete(image);
+            tx1.commit();
+            session.close();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

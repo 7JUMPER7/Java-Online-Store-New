@@ -11,15 +11,15 @@
 <main class="mainContainer container">
     <h1>
         Are you sure you want to delete
-        <span style="font-weight: 800;" th:text="${good.getName()}"></span>
+        <span style="font-weight: 800;" th:text="${name}"></span>
         ?
     </h1>
 
     <div class="d-flex">
-        <form th:action="@{'/admin/good/delete/' + ${good.getId()}}" method="post">
+        <form th:action="@{'/admin/' + ${controller} + '/delete/' + ${id}}" method="post">
             <input type="submit" value="Yes" class="btn btn-danger">
         </form>
-        <a th:href="@{'/good/' + ${good.getId()}}" class="btn">No</a>
+        <a th:href="@{'/'}" class="btn">No</a>
     </div>
 </main>
 </body>

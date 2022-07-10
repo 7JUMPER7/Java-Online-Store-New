@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Good</title>
+    <title>Edit Good</title>
     <div th:replace="fragments/header :: header-head"></div>
 </head>
 
@@ -10,24 +10,20 @@
 <body>
     <main class="mainContainer">
         <div th:if="${categories != null}" class="container form-signin" style="max-width: 500px">
-            <form th:action="@{/admin/good/create}" method="post" enctype="multipart/form-data">
-                <h1 class="h3 mb-3 fw-normal">Create Good</h1>
+            <form th:action="@{/admin/good/edit}" method="post">
+                <h1 class="h3 mb-3 fw-normal">Edit Good</h1>
 
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Select images</label>
-                    <input class="form-control" type="file" id="formFile" name="images" multiple>
-                </div>
                 <div class="form-floating my-2">
-                    <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name" required>
+                    <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name">
                     <label for="floatingName">Name</label>
                 </div>
                 <div class="form-floating my-2">
-                    <input type="number" class="form-control" id="floatingPrice" placeholder="Price" name="price" required>
+                    <input type="number" class="form-control" id="floatingPrice" placeholder="Price" name="price">
                     <label for="floatingPrice">Price</label>
                 </div>
                 <div class="form-floating my-2">
-                    <select class="form-control" id="floatingCategory" placeholder="Category" name="category" required>
-                        <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}"></option>
+                    <select class="form-control" id="floatingCategory" placeholder="Category" name="category" th:each="category : ${categories}">
+                        <option th:value="${category.getId()}" th:text="${category.getName()}"></option>
                     </select>
                     <label for="floatingCategory">Category</label>
                 </div>
@@ -36,7 +32,7 @@
                     <label for="floatingDescription">Description</label>
                 </div>
 
-                <button class="w-100 btn btn-dark my-2" type="submit">Add</button>
+                <button class="w-100 btn btn-dark my-2" type="submit">Edit</button>
             </form>
         </div>
     </main>
