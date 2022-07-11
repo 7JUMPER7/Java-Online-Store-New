@@ -1,5 +1,5 @@
 .mainContainer {
-    min-height: calc(100vh - 72px - 139px);
+    min-height: calc(100vh - 77px - 100px);
     margin: 50px auto;
 }
 
@@ -57,4 +57,24 @@
 .goodContainer .goodInfoContainer .goodBottom .buyBtn:hover {
     box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, .2);
     transform: scale(1.05);
+}
+
+.cartHeaderContainer a {
+    display: block;
+    text-decoration: none;
+    position: relative;
+}
+.cartHeaderContainer a .cartNumberContainer {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    height: 20px;
+    min-width: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

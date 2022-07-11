@@ -2,10 +2,11 @@ package com.example.onlinestorenew.controllers;
 
 import com.example.onlinestorenew.models.GoodEntity;
 import com.example.onlinestorenew.models.ImageEntity;
+import com.example.onlinestorenew.services.CartService;
 import com.example.onlinestorenew.services.CategoryService;
 import com.example.onlinestorenew.services.GoodService;
 import com.example.onlinestorenew.services.ImageService;
-import com.example.onlinestorenew.utils.Helpers;
+import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +56,8 @@ public class GoodController {
     }
 
     @GetMapping(value = "/good/{id}")
-    public String GoodView(Map<String, Object> model, @PathVariable(name = "id") Integer id) {
-        System.out.println(id);
+    public String GoodView(Map<String, Object> model, @PathVariable(name = "id") Integer id, HttpServletRequest request) {
+        model.put("cartCount", CartService.getCount(request.getSession()));
         if(id == null) {
             return "/errors/404";
         }
@@ -67,6 +69,9 @@ public class GoodController {
             List<ImageEntity> images = imageService.getGoodImages(good.getId());
             model.put("good", good);
             model.put("images", images);
+
+            CategoryService categoryService = new CategoryService();
+            model.put("category", categoryService.getById(good.getCategoryId()).getName());
             return "/good/good";
         }
 
@@ -95,5 +100,17 @@ public class GoodController {
         GoodService goodService = new GoodService();
         goodService.deleteGood(id);
         return new RedirectView("/");
+    }
+
+
+
+    @GetMapping(value = "/good/buy/{id}")
+    public RedirectView BuyGood(@PathVariable(name = "id") Integer id, HttpServletRequest request) {
+        if(id == null) {
+            return new RedirectView("/");
+        }
+
+        CartService.addToCart(request.getSession(), id);
+        return new RedirectView("/good/" + id);
     }
 }

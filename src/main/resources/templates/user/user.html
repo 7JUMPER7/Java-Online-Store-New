@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Online Store</title>
+    <div th:replace="fragments/header :: header-head"></div>
+</head>
+
+<div th:replace="fragments/header :: header"></div>
+
+<body>
+<main class="mainContainer container">
+    <div sec:authorize="hasAuthority('ADMIN')" class="adminInputsContainer">
+        <div class="mx-3">
+            <a href="/admin/good/create" class="btn btn-dark">Add Good</a>
+            <a href="/admin/category/create" class="btn btn-dark">Add Category</a>
+        </div>
+        <div class="mx-3">
+            <a href="/admin/category" class="btn btn-dark">View Categories</a>
+            <a href="/admin/order" class="btn btn-dark">View Orders</a>
+        </div>
+    </div>
+    <a th:href="@{/logout}" type="button" class="btn btn-outline-light me-2 btn-dark">Sign Out</a>
+</main>
+</body>
+
+<div th:replace="fragments/footer" :: footer></div>
+
+</html>

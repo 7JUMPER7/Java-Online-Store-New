@@ -14,8 +14,6 @@ public class HibernateSessionFactoryUtil {
         if(sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration().configure();
-                configuration.addAnnotatedClass(CartEntity.class);
-                configuration.addAnnotatedClass(CartGoodEntity.class);
                 configuration.addAnnotatedClass(GoodEntity.class);
                 configuration.addAnnotatedClass(ImageEntity.class);
                 configuration.addAnnotatedClass(OrderEntity.class);

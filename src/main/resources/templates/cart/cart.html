@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Your Cart</title>
+    <div th:replace="fragments/header :: header-head"></div>
+</head>
+
+<div th:replace="fragments/header :: header"></div>
+
+<body>
+<main class="mainContainer container">
+    <h1 th:if="${goods.size() == 0}">You have nothing in the cart.</h1>
+    <div th:if="${goods.size() > 0}" class="d-flex gap-5">
+        <div class="table-responsive" style="max-width: 50%; flex: 1 1 auto;">
+            <h2 class="fw-bold">Your Cart</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col" style="width: 50%;">Name</th>
+                    <th scope="col">Price</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="good : ${goods}">
+                    <td th:text="${good.getId()}"></td>
+                    <td th:text="${good.getName()}">
+                    <td th:text="${good.getPrice()}"></td>
+                    <td style="padding: 4px 8px;">
+                        <a th:href="@{'/cart/delete/' + ${good.getId()}}" style="padding: 2px 12px;" class="btn btn-dark">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 20px; font-size: 23px">
+                Total Price:
+                <span th:text="${(totalPrice != null)? totalPrice : 0}" style="font-weight: bold"></span>
+                UAH.
+            </div>
+        </div>
+
+        <div class="orderContainer" style="max-width: 50%; flex: 1 1 auto;">
+            <div class="container form-signin">
+                <form th:action="@{/order}" method="post">
+                    <h1 class="h3 mb-3 fw-normal fw-bold">Order Now</h1>
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control my-2" id="floatingName" placeholder="Name" name="name" th:value="${name}" required>
+                        <label for="floatingName">Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="tel" class="form-control my-2" id="floatingPhone" placeholder="Phone" name="phone" th:value="${phone}" required>
+                        <label for="floatingPhone">Phone</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="email" class="form-control my-2" id="floatingInput" placeholder="name@example.com" th:value="${email}" name="email" required>
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control my-2" id="floatingCity" placeholder="City" name="city" th:value="${city}" required>
+                        <label for="floatingCity">City</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control my-2" id="floatingCountry" placeholder="County" name="country" th:value="${country}" required>
+                        <label for="floatingCountry">County</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control my-2" id="floatingDepartment" placeholder="Department" name="department" required>
+                        <label for="floatingDepartment">Department</label>
+                    </div>
+
+                    <button class="w-100 btn btn-dark my-2" type="submit">Order</button>
+                    <div th:if="${message != null}">
+                        <div class="alert alert-danger" th:text="${message}"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+
+<div th:replace="fragments/footer" :: footer></div>
+
+</html>

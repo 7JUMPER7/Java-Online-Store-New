@@ -33,12 +33,13 @@
 
     <div class="goodInfoContainer">
       <div class="goodTop">
-        <h1 th:text="${good.getName()}"></h1>
-        <p th:text="${good.getDescription()}"></p>
+        <h1 th:text="${good.getName()}" class="my-0"></h1>
+        <h5 th:text="${category}" class="my-0"></h5>
+        <p th:text="${good.getDescription()}" class="my-4"></p>
       </div>
       <div class="goodBottom">
-        <h2 th:text="${good.getPrice() + ' грн'}"></h2>
-        <a class="buyBtn" th:href="@{'/good/buy/' + ${good.getId()}}" th:text="Buy"></a>
+        <h2 th:text="${good.getPrice() + ' UAH'}"></h2>
+        <a class="buyBtn" th:href="@{'/good/buy/' + ${good.getId()}}" th:text="'Add to cart'"></a>
       </div>
     </div>
   </div>

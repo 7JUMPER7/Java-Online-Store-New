@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Admin Panel</title>
+    <div th:replace="fragments/header :: header-head"></div>
+</head>
+
+<div th:replace="fragments/header :: header"></div>
+
+<body>
+<main class="mainContainer container">
+    <div class="table-responsive">
+        <h1>Categories</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Items</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Place</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.getId()}"></td>
+                <td th:text="${order.getName()}"></td>
+                <td style="white-space: pre-line;" th:text="${order.getList()}"></td>
+                <td th:text="${order.getTotalPrice()}"></td>
+                <td th:text="${order.getPlace()}"></td>
+                <td th:text="${order.getEmail()}"></td>
+                <td th:text="${order.getPhone()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+
+<div th:replace="fragments/footer" :: footer></div>
+
+</html>

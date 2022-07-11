@@ -22,7 +22,7 @@
       <tbody>
       <tr th:each="category : ${categories}">
         <td th:text="${category.getId()}"></td>
-        <td th:text="${category.getName()}">Mark
+        <td th:text="${category.getName()}"></td>
         <td>
           <a th:href="@{'/admin/category/edit/' + ${category.getId()}}" class="btn btn-dark">Edit</a>
           <a th:href="@{'/admin/category/delete/' + ${category.getId()}}" class="btn btn-dark">Delete</a>

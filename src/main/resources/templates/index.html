@@ -10,12 +10,14 @@
 <body>
     <main class="mainContainer container">
         <div sec:authorize="hasAuthority('ADMIN')" class="adminInputsContainer">
-            <a href="/admin/good/create" class="btn btn-dark">Add Good</a>
-            <a href="/admin/category/create" class="btn btn-dark">Add Category</a>
-        </div>
-        <div sec:authorize="hasAuthority('ADMIN')" class="adminInputsContainer">
-            <a href="/admin/good/create" class="btn btn-dark">Add Good</a>
-            <a href="/admin/category" class="btn btn-dark">View Categories</a>
+            <div class="mx-3">
+                <a href="/admin/good/create" class="btn btn-dark">Add Good</a>
+                <a href="/admin/category/create" class="btn btn-dark">Add Category</a>
+            </div>
+            <div class="mx-3">
+                <a href="/admin/category" class="btn btn-dark">View Categories</a>
+                <a href="/admin/order" class="btn btn-dark">View Orders</a>
+            </div>
         </div>
 
         <div class="d-flex align-items-center justify-content-between my-4">
@@ -31,7 +33,7 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${good.getName()}"></h5>
                         <p class="card-text" th:text="${good.getDescription()}"></p>
-                        <h5 class="card-title" th:text="${good.getPrice() + ' грн'}"></h5>
+                        <h5 class="card-title" th:text="${good.getPrice() + ' UAH'}"></h5>
                     </div>
                 </div>
             </a>

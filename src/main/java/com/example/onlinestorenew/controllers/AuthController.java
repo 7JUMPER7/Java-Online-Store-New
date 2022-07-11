@@ -1,6 +1,7 @@
 package com.example.onlinestorenew.controllers;
 
 import com.example.onlinestorenew.models.UserEntity;
+import com.example.onlinestorenew.services.CartService;
 import com.example.onlinestorenew.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,15 +10,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+
 @Controller
 public class AuthController {
     @GetMapping(value = "/login")
-    public String Login() {
+    public String Login(HttpServletRequest request, Map<String, Object> model) {
+        model.put("cartCount", CartService.getCount(request.getSession()));
         return "/login";
     }
 
     @GetMapping(value = "/signup")
-    public String SignupView() {
+    public String SignupView(HttpServletRequest request, Map<String, Object> model) {
+        model.put("cartCount", CartService.getCount(request.getSession()));
         return "/signup";
     }
     @PostMapping(value = "/signup")
