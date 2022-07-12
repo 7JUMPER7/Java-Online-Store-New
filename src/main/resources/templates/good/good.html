@@ -18,7 +18,7 @@
     <div id="carouselExampleControls" class="carousel slide carousel-dark" data-bs-ride="carousel">
       <div class="carousel-inner m-3">
         <div th:class="'carousel-item' + ${(i.index == 0) ? ' active' : ''}" th:each="image, i : ${images}">
-          <img th:src="@{'/images/' + ${image.getId()}}" class="d-block w-100" th:alt="${image.getFilename()}">
+          <img th:src="@{'/images/' + ${image.getId()}}" class="d-block w-100" style="height: 500px; object-fit: contain;" th:alt="${image.getFilename()}">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -39,7 +39,7 @@
       </div>
       <div class="goodBottom">
         <h2 th:text="${good.getPrice() + ' UAH'}"></h2>
-        <a class="buyBtn" th:href="@{'/good/buy/' + ${good.getId()}}" th:text="'Add to cart'"></a>
+        <a class="styledBtn" th:href="@{'/good/buy/' + ${good.getId()}}" th:text="'Add to cart'"></a>
       </div>
     </div>
   </div>

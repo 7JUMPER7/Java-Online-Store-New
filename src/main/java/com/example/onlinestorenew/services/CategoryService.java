@@ -11,6 +11,10 @@ public class CategoryService {
         categoryDao = new CategoryDao();
     }
 
+    public CategoryEntity getByName(String name) {
+        return categoryDao.getByName(name);
+    }
+
     public CategoryEntity getById(int id) {
         return categoryDao.getById(id);
     }

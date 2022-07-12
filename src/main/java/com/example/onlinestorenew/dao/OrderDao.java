@@ -9,6 +9,13 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class OrderDao {
+    public List<OrderEntity> getUserOrders(String email) {
+        return (List<OrderEntity>) HibernateSessionFactoryUtil.getSessionFactory().openSession()
+                .createQuery("FROM OrderEntity WHERE email = :email")
+                .setParameter("email", email)
+                .list();
+    }
+
     public OrderEntity getOrder(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(OrderEntity.class, id);
     }

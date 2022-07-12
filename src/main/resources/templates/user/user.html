@@ -17,9 +17,70 @@
         <div class="mx-3">
             <a href="/admin/category" class="btn btn-dark">View Categories</a>
             <a href="/admin/order" class="btn btn-dark">View Orders</a>
+            <a href="/admin/user" class="btn btn-dark">View Users</a>
         </div>
     </div>
-    <a th:href="@{/logout}" type="button" class="btn btn-outline-light me-2 btn-dark">Sign Out</a>
+
+    <div class="container form-signin mt-5" style="max-width: 400px">
+        <form th:action="@{'/user/edit/' + ${id}}" method="post">
+            <h1 class="h3 mb-3 fw-normal">Your info</h1>
+
+            <div class="form-floating">
+                <input type="text" class="form-control my-2" id="floatingName" placeholder="Name" name="name" th:value="${name}" required>
+                <label for="floatingName">Name</label>
+            </div>
+            <div class="form-floating">
+                <input type="email" class="form-control my-2" id="floatingInput" placeholder="name@example.com" name="email" th:value="${email}" readonly>
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control my-2" id="floatingCity" placeholder="City" name="city" th:value="${city}" required>
+                <label for="floatingCity">City</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control my-2" id="floatingCountry" placeholder="County" name="country" th:value="${country}" required>
+                <label for="floatingCountry">County</label>
+            </div>
+            <div class="form-floating">
+                <input type="tel" class="form-control my-2" id="floatingPhone" placeholder="Phone" name="phone" th:value="${phone}">
+                <label for="floatingPhone">Phone</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control my-2" id="floatingPassword" placeholder="New password" name="newPassword">
+                <label for="floatingPassword">New Password</label>
+            </div>
+
+            <button class="w-100 btn btn-dark my-2" type="submit">Edit info</button>
+            <div th:if="${message != null}">
+                <div class="alert alert-danger" th:text="${message}"></div>
+            </div>
+            <a th:href="@{/logout}" type="button" class="w-100 btn btn-dark my-2 mt-0">Sign Out</a>
+        </form>
+    </div>
+
+    <div class="table-responsive mt-5">
+        <h1>Your order</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Items</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Place</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.getId()}"></td>
+                <td th:text="${order.getName()}"></td>
+                <td style="white-space: pre-line;" th:text="${order.getList()}"></td>
+                <td th:text="${order.getTotalPrice()}"></td>
+                <td th:text="${order.getPlace()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 </body>
 

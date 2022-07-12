@@ -10,18 +10,26 @@
 <body>
 <main class="mainContainer container">
   <div class="table-responsive">
-    <h1>Categories</h1>
+    <h1>Users</h1>
     <table class="table">
       <thead>
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Place</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="category : ${categories}">
-        <th th:text="${category.getId()}"></th>
-        <td th:text="${category.getName()}">Mark</td>
+      <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getRole()}"></td>
+        <td th:text="${user.getCity()} + ', ' + ${user.getCountry()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:text="${user.getPhone()}"></td>
       </tr>
       </tbody>
     </table>

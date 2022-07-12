@@ -12,6 +12,10 @@ public class OrderService {
         orderDao = new OrderDao();
     }
 
+    public List<OrderEntity> getUserOrders(String email) {
+        return orderDao.getUserOrders(email);
+    }
+
     public OrderEntity getOrder(int id) {
         return orderDao.getOrder(id);
     }

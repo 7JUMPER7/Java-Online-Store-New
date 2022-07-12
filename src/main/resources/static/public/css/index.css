@@ -22,6 +22,7 @@
     min-height: 500px;
     margin: 30px auto;
     max-width: 1200px;
+    max-height: 600px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
@@ -45,7 +46,7 @@
     justify-content: space-between;
     /*flex: 1 1 auto;*/
 }
-.goodContainer .goodInfoContainer .goodBottom .buyBtn {
+.styledBtn {
     padding: 10px 60px;
     font-weight: 800;
     background-color: black;
@@ -53,10 +54,17 @@
     border-radius: 7px;
     color: white;
     transition: .2s all;
+
+    min-width: 38px;
+    min-height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.goodContainer .goodInfoContainer .goodBottom .buyBtn:hover {
+.styledBtn:hover {
     box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, .2);
     transform: scale(1.05);
+    color: white;
 }
 
 .cartHeaderContainer a {

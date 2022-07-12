@@ -16,7 +16,6 @@ public class HomeController {
     public String Index(Map<String, Object> model, HttpServletRequest request) {
         GoodService goodService = new GoodService();
         List<GoodEntity> goods = goodService.findAllGoods();
-        System.out.println(goods);
         model.put("goodsList", goods);
         model.put("cartCount", CartService.getCount(request.getSession()));
         return "/index";

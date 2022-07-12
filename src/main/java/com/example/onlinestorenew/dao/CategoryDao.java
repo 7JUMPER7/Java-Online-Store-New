@@ -9,6 +9,17 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class CategoryDao {
+    public CategoryEntity getByName(String name) {
+        List<CategoryEntity> result = (List<CategoryEntity>) HibernateSessionFactoryUtil
+                .getSessionFactory().openSession()
+                .createQuery("FROM CategoryEntity WHERE name LIKE '%' || :name || '%'")
+                .setParameter("name", name).list();
+        if(result.size() > 0) {
+            return result.get(0);
+        }
+        return null;
+    }
+
     public CategoryEntity getById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(CategoryEntity.class, id);
     }
